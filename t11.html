@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: rgb(154, 203, 181);
+        }
+
+        #exercise-form {
+            margin-bottom: 20px;
+        }
+
+        #exercise-list {
+            list-style-type: none;
+            padding: 0;
+            background-color: rgb(255, 255, 180);
+        }
+
+        .exercise-item {
+            border: 5px solid #5affc5;
+            margin: 10px 0;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <h1><center>Fitness Tracker</center></h1>
+
+    <form id="exercise-form">
+        <center><h4><label for="exercise">Exercise:</label>
+        <input type="text" id="exercise" required>
+
+        <label for="duration">Duration (minutes):</label>
+        <input type="number" id="duration" required>
+
+        <label for="calories">Calories Burned:</label>
+        <input type="number" id="calories" required>
+        <button type="button" onclick="addExercise()">Add Exercise</button></h4></center>
+    </form>
+
+    <h5><ul id="exercise-list"></ul></h5>
+
+    <script>
+        function addExercise() {
+            var exerciseInput = document.getElementById('exercise');
+            var durationInput = document.getElementById('duration');
+            var caloriesInput = document.getElementById('calories');
+            var exerciseList = document.getElementById('exercise-list');
+
+            var exercise = exerciseInput.value;
+            var duration = durationInput.value;
+            var calories = caloriesInput.value;
+
+            if (exercise && duration && calories) {
+                var exerciseItem = document.createElement('li');
+                exerciseItem.className = 'exercise-item';
+                exerciseItem.innerHTML = `
+                    <span>${exercise}</span>
+                    <span>Duration: ${duration} min</span>
+                    <span>Calories: ${calories}</span>
+                `;
+                exerciseList.appendChild(exerciseItem);
+
+                // Clear input fields
+                exerciseInput.value = '';
+                durationInput.value = '';
+                caloriesInput.value = '';
+            } else {
+                alert('Please fill in all the fields');
+            }
+        }
+    </script>
+</body>
+</html>
